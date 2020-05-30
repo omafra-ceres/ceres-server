@@ -40,8 +40,46 @@ MongoClient.connect(mongoConnectionString, {
   dataRoutes.route("/create").post((req, res) => {
     db.collection("schemas")
       .insertOne(req.body.schema)
-      .then(console.log)
-      .catch(console.log)
+      .then(() => {
+        db.createCollection(req.body.schema.title)
+          .then(() => {
+            res.status(200)
+          }).catch(() => {
+            res.status(400).send({ message: "Could not create collection" })
+          })
+      }).catch(() => {
+        res.status(400).send({ message: "Could not create collection" })
+      })
+  })
+
+  dataRoutes.route("/delete").post((req, res) => {
+    const deleteSchema = db.collection("schemas").deleteOne({ title: req.body.collection })
+    const dropCollection = db.collection(req.body.collection).drop()
+
+    Promise.all([deleteSchema, dropCollection])
+      .then(() => {
+        db.collection("schemas")
+          .find()
+          .toArray()
+          .then(schemas => {
+            res.json(schemas.map(schema => schema.title))
+          }).catch(() => {
+            res.status(400).send({ message: "Could not get schemas" })
+          })
+      }).catch(() => {
+        res.status(400).send({
+          message: "Could not delete collection"
+        })
+      })
+    
+    // db.collection(req.body.collection)
+    //   .drop()
+    //   .then(() => {
+    //     db.collection("schemas").deleteOne
+    //     res.status(200).send({ message: "collection deleted" })
+    //   }).catch(() => {
+    //     res.status(400).send({ message: "could not delete collection" })
+    //   })
   })
 
   dataRoutes.route("/:collectionName").get((req, res) => {
