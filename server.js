@@ -27,17 +27,22 @@ MongoClient.connect(mongoConnectionString, {
   app.use('/data', dataRoutes)
 
   dataRoutes.route("/").get((req, res) => {
-    db.collections()
-      .then(collections => {
-        res.json(collections.map(col => col.collectionName))
-      }).catch( () => {
+    db.collection("schemas")
+      .find()
+      .toArray()
+      .then(schemas => {
+        res.json(schemas.map(schema => schema.title))
+      }).catch(() => {
         res.status(400).send({ message: "Whoops, something went wrong!" })
       })
   })
 
-  // dataRoutes.route("/create").post((req, res) => {
-    
-  // })
+  dataRoutes.route("/create").post((req, res) => {
+    db.collection("schemas")
+      .insertOne(req.body.schema)
+      .then(console.log)
+      .catch(console.log)
+  })
 
   dataRoutes.route("/:collectionName").get((req, res) => {
     db.collection(req.params.collectionName)
