@@ -1,14 +1,9 @@
 const express = require('express')
 const mongo = require('mongodb')
 
-const ObjectID = mongo.ObjectID
+const nameToPath = require('../utils/pathUtils')
 
-const nameToPath = name => (
-  name && name.toLowerCase()
-    .replace(/[^a-z\d-_ ]/g, "")
-    .trim()
-    .replace(/[\s-_]+/g, "-")
-)
+const ObjectID = mongo.ObjectID
 
 const dataRouter = db => {
   const router = express.Router()
@@ -35,7 +30,7 @@ const dataRouter = db => {
       .insertOne({details, schema})
       .then(() => {
         db.createCollection(details.path, {
-          validator: schema
+          validator: { $jsonSchema: schema }
         }).then(() => {
             res.status(200).send()
           }).catch(() => {
@@ -94,6 +89,28 @@ const dataRouter = db => {
           item: response.ops[0]
         })
       }).catch(err => {
+        console.log(err)
+        res.status(400).send({message: err.errmsg})
+      })
+  })
+  
+  // Used to update details of a data structure (name, description)
+  // Does not currently support updating structure schema
+  router.route("/:dataPath/update").post((req, res) => {
+    const filter = { details: { path: req.params.dataPath }}
+    const updaters = Object.keys(req.params.details).map(key => ({
+     [`details.${key}`]: req.params.details[key]
+    })).reduce((obj, updater) => ({...obj, ...updater}) , {})
+    const update = { $set: { ...updaters }}
+    db.collection("data-structures")
+      .updateOne(filter, update)
+      .then(response => {
+        res.status(200).send({
+          message: "Dataset updated",
+          item: response.ops[0]
+        })
+      }).catch(err => {
+        console.log(err)
         res.status(400).send({message: err.errmsg})
       })
   })
