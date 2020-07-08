@@ -1,5 +1,5 @@
 const express = require('express')
-const { types, randomDate, randomType, randomValue } = require('../utils/randomValues')
+const { types, randomDate, randomType, randomValue, randomShortString } = require('../utils/randomValues')
 const nameToPath = require('../utils/pathUtils')
 
 const randomString = () => types.string()
@@ -34,7 +34,7 @@ const testRouter = db => {
     const rows = req.query.rows || 55
 
     const testCollectionName = randomString()
-    const testDescription = Array(50).fill(randomString()).join(" ")
+    const testDescription = Array(20).fill(randomString()).join(" ")
 
     const testDetails = {
       path: nameToPath(testCollectionName),
@@ -53,7 +53,7 @@ const testRouter = db => {
 
     Array(cols).fill("").map(() => {
       const required = !!Math.round(Math.random())
-      const title = randomString()
+      const title = randomShortString()
       const type = randomType()
 
       if (required) testSchema.required.push(title)

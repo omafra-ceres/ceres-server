@@ -1,6 +1,7 @@
 const randomDate = () => new Date(Date.now() - (Math.floor(Math.random() * 86400000)))
 
-const randomString = () => (Math.random()+1).toString(36).substring(2)
+const randomShortString = () => Math.random().toString(36).substring(2, 15)
+const randomString = () => Array(Math.ceil(Math.random() * 6)).fill("").map(() => randomShortString()).join(" ")
 const randomNumber = () => Math.ceil(Math.random() * 1000)
 const randomBool = () => !!Math.round(Math.random())
 
@@ -27,5 +28,6 @@ module.exports = {
   types,
   randomDate,
   randomType,
-  randomValue
+  randomValue,
+  randomShortString
 }
