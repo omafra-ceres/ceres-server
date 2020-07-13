@@ -97,17 +97,17 @@ const dataRouter = db => {
   // Used to update details of a data structure (name, description)
   // Does not currently support updating structure schema
   router.route("/:dataPath/update").post((req, res) => {
-    const filter = { details: { path: req.params.dataPath }}
-    const updaters = Object.keys(req.params.details).map(key => ({
-     [`details.${key}`]: req.params.details[key]
-    })).reduce((obj, updater) => ({...obj, ...updater}) , {})
+    const filter = { "details.path": req.params.dataPath }
+    const updaters = Object.keys(req.body.details)
+      .map(key => ({ [`details.${key}`]: req.body.details[key] }))
+      .reduce((obj, updater) => ({ ...obj, ...updater }) , {})
     const update = { $set: { ...updaters }}
+
     db.collection("data-structures")
       .updateOne(filter, update)
-      .then(response => {
+      .then(() => {
         res.status(200).send({
           message: "Dataset updated",
-          item: response.ops[0]
         })
       }).catch(err => {
         console.log(err)
