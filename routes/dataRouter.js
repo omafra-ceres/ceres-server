@@ -93,14 +93,32 @@ const dataRouter = db => {
         res.status(400).send({message: err.errmsg})
       })
   })
+
+  const getDetailUpdaters = details => (
+    Object.keys(details)
+      .map(key => ({ [`details.${key}`]: details[key] }))
+      .reduce((obj, updater) => ({ ...obj, ...updater }) , {})
+  )
   
-  // Used to update details of a data structure (name, description)
-  // Does not currently support updating structure schema
+  const getHeaderUpdaters = headers => {
+    const updaters = []
+    Object.keys(headers).forEach(id => {
+      Object.keys(headers[id]).forEach(key => {
+        updaters.push({ [`schema.properties.${id}.${key}`]: headers[id][key] })
+      })
+    })
+    return updaters.reduce((obj, updater) => ({ ...obj, ...updater }) , {})
+  }
+  
+  // Used to update details of a data structure (name, description) and schema property names
   router.route("/:dataPath/update").post((req, res) => {
     const filter = { "details.path": req.params.dataPath }
-    const updaters = Object.keys(req.body.details)
-      .map(key => ({ [`details.${key}`]: req.body.details[key] }))
-      .reduce((obj, updater) => ({ ...obj, ...updater }) , {})
+    const { type, details, headers } = req.body
+    const getUpdaters = {
+      details: () => getDetailUpdaters(details),
+      headers: () => getHeaderUpdaters(headers)
+    }
+    const updaters = (getUpdaters[type] || (() => ({})))()
     const update = { $set: { ...updaters }}
 
     db.collection("data-structures")
