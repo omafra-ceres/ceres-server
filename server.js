@@ -3,6 +3,7 @@ const app = express()
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const mongo = require('mongodb')
+require('dotenv').config()
 
 const dataRouter = require('./routes/dataRouter')
 const testRouter = require('./routes/testRouter')
@@ -10,7 +11,7 @@ const testRouter = require('./routes/testRouter')
 const MongoClient = mongo.MongoClient
 
 const PORT = 4000
-const mongoConnectionString = "mongodb+srv://admin-user:admin-user@c4c-demo-yt3tv.azure.mongodb.net/test?retryWrites=true&w=majority"
+const mongoConnectionString = process.env.DB_URL
 
 MongoClient.connect(mongoConnectionString, {
   useUnifiedTopology: true
