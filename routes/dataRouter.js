@@ -8,6 +8,8 @@ const ObjectID = mongo.ObjectID
 const dataRouter = db => {
   const router = express.Router()
 
+  // const admin = db.admin()
+
   router.route("/").get((req, res) => {
     db.collection("data-structures")
       .find()
@@ -100,30 +102,34 @@ const dataRouter = db => {
       .reduce((obj, updater) => ({ ...obj, ...updater }) , {})
   )
   
-  const getHeaderUpdaters = headers => {
+  const getHeaderUpdaters = schema => {
     const updaters = []
-    Object.keys(headers).forEach(id => {
-      Object.keys(headers[id]).forEach(key => {
-        updaters.push({ [`schema.properties.${id}.${key}`]: headers[id][key] })
+    Object.keys(schema).forEach(id => {
+      Object.keys(schema[id]).forEach(key => {
+        updaters.push({ [`schema.properties.${id}.${key}`]: schema[id][key] })
       })
     })
     return updaters.reduce((obj, updater) => ({ ...obj, ...updater }) , {})
   }
   
-  // Used to update details of a data structure (name, description) and schema property names
+  // Used to update details and schema properties of a data structure
   router.route("/:dataPath/update").post((req, res) => {
     const filter = { "details.path": req.params.dataPath }
-    const { type, details, headers } = req.body
+    const { type, details, schema } = req.body
     const getUpdaters = {
       details: () => getDetailUpdaters(details),
-      headers: () => getHeaderUpdaters(headers)
+      schema: () => getHeaderUpdaters(schema)
     }
     const updaters = (getUpdaters[type] || (() => ({})))()
     const update = { $set: { ...updaters }}
 
     db.collection("data-structures")
-      .updateOne(filter, update)
-      .then(() => {
+      .findOneAndUpdate(filter, update, { returnOriginal: false })
+      .then((response) => {
+        db.command({
+          collMod: req.params.dataPath,
+          validator: { $jsonSchema: response.value.schema }
+        }).catch(console.error)
         res.status(200).send({
           message: "Dataset updated",
         })
