@@ -139,13 +139,32 @@ const dataRouter = db => {
       })
   })
   
-  // router.route("/:dataPath/:id").get((req, res) => {
-  //   db.collection(req.params.collectionName)
-  //     .findOne({ "_id": ObjectID(req.params.id) })
-  //     .then(item => {
-  //       res.json(item)
-  //     })
-  // })
+  // Used to delete data schema fields
+  router.route("/:dataPath/delete").post((req, res) => {
+    const filter = { "details.path": req.params.dataPath }
+    const updaters = req.body.fields
+      .map(id => `schema.properties.${id}`)
+      .reduce((acc, cur) => {
+        acc[cur] = ""
+        return acc
+      },{})
+    const update = { $unset: updaters }
+
+    db.collection("data-structures")
+      .findOneAndUpdate(filter, update, { returnOriginal: false })
+      .then((response) => {
+        db.command({
+          collMod: req.params.dataPath,
+          validator: { $jsonSchema: response.value.schema }
+        }).catch(console.error)
+        res.status(200).send({
+          message: "Dataset updated",
+        })
+      }).catch(err => {
+        console.log(err)
+        res.status(400).send({message: err.errmsg})
+      })
+  })
 
   return router
 }
