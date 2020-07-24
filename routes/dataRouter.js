@@ -8,11 +8,10 @@ const ObjectID = mongo.ObjectID
 const dataRouter = db => {
   const router = express.Router()
 
-  // const admin = db.admin()
-
   router.route("/").get((req, res) => {
+    const status = req.query.status || "published"
     db.collection("data-structures")
-      .find()
+      .find({ "details.status": status })
       .toArray()
       .then(datasets => {
         res.json(datasets.map(set => set.details))
@@ -26,7 +25,7 @@ const dataRouter = db => {
     const {details, schema} = req.body
     details.path = collectionPath
     details.created_at = Date.now()
-    details.status = "draft"
+    details.status = "published"
 
     db.collection("data-structures")
       .insertOne({details, schema})
