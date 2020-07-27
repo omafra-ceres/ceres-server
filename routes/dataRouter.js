@@ -63,6 +63,28 @@ const dataRouter = db => {
       })
   })
 
+  router.route("/archive").post((req, res) => {
+    const filter = { "details.path": req.body.path }
+    const update = { $set: { "details.status": "archived" }}
+
+    db.collection("data-structures")
+      .findOneAndUpdate(filter, update, { returnOriginal: false })
+      .then(() => {
+        res.status(200).send({})
+      })
+  })
+  
+  router.route("/unarchive").post((req, res) => {
+    const filter = { "details.path": req.body.path }
+    const update = { $set: { "details.status": "published" }}
+
+    db.collection("data-structures")
+      .findOneAndUpdate(filter, update, { returnOriginal: false })
+      .then(() => {
+        res.status(200).send({})
+      })
+  })
+
   router.route("/:dataPath").get((req, res) => {
     const getStructure = db.collection("data-structures").findOne({ "details.path": req.params.dataPath })
     const getItems = db.collection(req.params.dataPath).find().toArray()
