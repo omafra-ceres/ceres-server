@@ -10,7 +10,7 @@ const testRouter = require('./routes/testRouter')
 
 const MongoClient = mongo.MongoClient
 
-const PORT = 4000
+const PORT = process.env.PORT || 4000
 const mongoConnectionString = process.env.DB_URL
 
 MongoClient.connect(mongoConnectionString, {
