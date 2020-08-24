@@ -10,7 +10,7 @@ const dataRouter = db => {
 
   router.route("/").get(async (req, res) => {
     const datasets = await db.collection("datasets")
-      .find({ "is_deleted": null })
+      .find({ "deleted_on": null })
       .toArray()
       .catch(() => {
         res.status(400)
@@ -94,7 +94,7 @@ const dataRouter = db => {
     const getItems = db.collection("data")
       .find({
         "dataset_id": req.params.datasetId,
-        "is_deleted": null
+        "deleted_on": null
       }).toArray()
 
     const [dataset, items] = await Promise.all([
@@ -118,11 +118,26 @@ const dataRouter = db => {
       items
     })
   })
+  
+  router.route("/:datasetId/deleted").get(async (req, res) => {
+    const items = await db.collection("data")
+      .find({
+        "dataset_id": req.params.datasetId,
+        "deleted_on": { $exists: true }
+      }, { "sort": "deleted_on" })
+      .toArray()
+      .catch(() => {
+        res.status(400)
+          .send({ message: "could not get items" })
+      })
+
+    res.send({ items })
+  })
 
   router.route("/delete-items").post(async (req, res) => {
     const ids = req.body.items.map(item => ObjectID(item))
     const filter = {"_id": { $in: ids }}
-    const update = { $set: { "is_deleted": true }}
+    const update = { $set: { "deleted_on": Date.now() }}
     await db.collection("data")
       .updateMany(filter, update)
       .catch(err => {
