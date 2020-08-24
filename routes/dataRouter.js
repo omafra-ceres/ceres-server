@@ -16,7 +16,7 @@ const dataRouter = db => {
         res.status(400)
            .send({ message: "Whoops, something went wrong!" })
       })
-    res.json(datasets.map(set => set.details))
+    res.json(datasets.map(set => ({id: set._id.valueOf(), ...set.details})))
   })
 
   router.route("/create").post(async (req, res) => {
@@ -131,12 +131,6 @@ const dataRouter = db => {
     })
   })
 
-  const getDetailUpdaters = details => (
-    Object.keys(details)
-      .map(key => ({ [`details.${key}`]: details[key] }))
-      .reduce((obj, updater) => ({ ...obj, ...updater }) , {})
-  )
-  
   // Used to update dataset details
   router.route("/:datasetId/update").post(async (req, res) => {
     const filter = {"_id": ObjectID(req.params.datasetId)}
@@ -159,31 +153,31 @@ const dataRouter = db => {
   })
   
   // Used to delete data schema fields
-  router.route("/:dataPath/delete").post((req, res) => {
-    const filter = { "details.path": req.params.dataPath }
-    const updaters = req.body.fields
-      .map(id => `schema.properties.${id}`)
-      .reduce((acc, cur) => {
-        acc[cur] = ""
-        return acc
-      },{})
-    const update = { $unset: updaters }
+  // router.route("/:dataPath/delete").post((req, res) => {
+  //   const filter = { "details.path": req.params.dataPath }
+  //   const updaters = req.body.fields
+  //     .map(id => `schema.properties.${id}`)
+  //     .reduce((acc, cur) => {
+  //       acc[cur] = ""
+  //       return acc
+  //     },{})
+  //   const update = { $unset: updaters }
 
-    db.collection("data-structures")
-      .findOneAndUpdate(filter, update, { returnOriginal: false })
-      .then((response) => {
-        db.command({
-          collMod: req.params.dataPath,
-          validator: { $jsonSchema: response.value.schema }
-        }).catch(console.error)
-        res.status(200).send({
-          message: "Dataset updated",
-        })
-      }).catch(err => {
-        console.log(err)
-        res.status(400).send({message: err.errmsg})
-      })
-  })
+  //   db.collection("data-structures")
+  //     .findOneAndUpdate(filter, update, { returnOriginal: false })
+  //     .then((response) => {
+  //       db.command({
+  //         collMod: req.params.dataPath,
+  //         validator: { $jsonSchema: response.value.schema }
+  //       }).catch(console.error)
+  //       res.status(200).send({
+  //         message: "Dataset updated",
+  //       })
+  //     }).catch(err => {
+  //       console.log(err)
+  //       res.status(400).send({message: err.errmsg})
+  //     })
+  // })
 
   return router
 }
