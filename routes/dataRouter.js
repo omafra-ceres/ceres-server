@@ -92,8 +92,10 @@ const dataRouter = db => {
       .findOne(datasetId)
       
     const getItems = db.collection("data")
-      .find({ "dataset_id": req.params.datasetId })
-      .toArray()
+      .find({
+        "dataset_id": req.params.datasetId,
+        "is_deleted": null
+      }).toArray()
 
     const [dataset, items] = await Promise.all([
       getDataset,
@@ -117,6 +119,21 @@ const dataRouter = db => {
     })
   })
 
+  router.route("/delete-items").post(async (req, res) => {
+    const ids = req.body.items.map(item => ObjectID(item))
+    const filter = {"_id": { $in: ids }}
+    const update = { $set: { "is_deleted": true }}
+    await db.collection("data")
+      .updateMany(filter, update)
+      .catch(err => {
+        res.status(400).send({message: err.errmsg})
+      })
+    
+    res.status(200).send({
+      message: "Items deleted"
+    })
+  })
+
   router.route("/:datasetId").post(async (req, res) => {
     const document = await db.collection("data")
       .insertOne({
@@ -130,7 +147,7 @@ const dataRouter = db => {
       item: document.ops[0]
     })
   })
-
+  
   // Used to update dataset details
   router.route("/:datasetId/update").post(async (req, res) => {
     const filter = {"_id": ObjectID(req.params.datasetId)}
