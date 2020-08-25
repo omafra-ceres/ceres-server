@@ -1,45 +1,24 @@
 const express = require('express')
 const mongo = require('mongodb')
 
-const nameToPath = require('../utils/pathUtils')
+const { datasetService, templateService } = require('../services')
 
-const ObjectID = mongo.ObjectID
-
-const dataRouter = db => {
+const dataRouter = () => {
   const router = express.Router()
 
   router.route("/").get(async (req, res) => {
-    const datasets = await db.collection("datasets")
-      .find({ "deleted_on": null })
-      .toArray()
-      .catch(() => {
-        res.status(400)
-           .send({ message: "Whoops, something went wrong!" })
-      })
-    res.json(datasets.map(set => ({id: set._id.valueOf(), ...set.details})))
+    const datasets = await datasetService.list()
+    res.json(datasets)
   })
 
   router.route("/create").post(async (req, res) => {
     const { details, template } = req.body
     details.created_at = Date.now()
 
-    const createdTemplate = await db.collection("templates")
-      .insertOne(template)
-      .catch(() => {
-        res.status(400)
-           .send({ message: "Could not create template" })
-      })
-
-    const createdDataset = await db.collection("datasets")
-      .insertOne({
-        details,
-        "template_id": createdTemplate.ops[0]._id
-      }).catch(() => {
-        res.status(400)
-           .send({ message: "could not create dataset" })
-      })
+    const templateId = await templateService.create(template)
+    const datasetId = await datasetService.create(details, templateId)
     
-    res.json({ id: createdDataset.ops[0]._id.valueOf() })
+    res.json({ id: datasetId.valueOf() })
   })
 
   // router.route("/delete").post((req, res) => {
@@ -86,62 +65,45 @@ const dataRouter = db => {
   // })
 
   router.route("/:datasetId").get(async (req, res) => {
-    const datasetId = ObjectID(req.params.datasetId)
-    
-    const getDataset = db.collection("datasets")
-      .findOne(datasetId)
-      
-    const getItems = db.collection("data")
-      .find({
-        "dataset_id": req.params.datasetId,
-        "deleted_on": null
-      }).toArray()
-
-    const [dataset, items] = await Promise.all([
-      getDataset,
-      getItems
-    ]).catch(() => {
-      res.status(400)
-         .send({ message: "could not get dataset" })
-    })
-
-    const template = await db.collection("templates")
-      .findOne(dataset.template_id)
+    const dataset = await datasetService
+      .get(req.params.datasetId)
       .catch(() => {
-        res.status(400)
-           .send({ message: "could not get dataset" })
+        res.status(400).send({ message: "could not get dataset" })
+      })
+    res.send(dataset)
+  })
+
+  router.route("/:datasetId/addItem").post(async (req, res) => {
+    const { datasetId } = req.params
+    const dataValues = req.body
+    
+    const item = await datasetService
+      .addItem(datasetId, dataValues)
+      .catch(() => {
+        res.status(400).send({ message: "could not add item" })
       })
     
-    res.send({
-      details: dataset.details,
-      template,
-      items
-    })
+    res.status(200).send({ message: "Item added to dataset", item })
   })
   
   router.route("/:datasetId/deleted").get(async (req, res) => {
-    const items = await db.collection("data")
-      .find({
-        "dataset_id": req.params.datasetId,
-        "deleted_on": { $exists: true }
-      }, { "sort": "deleted_on" })
-      .toArray()
+    const { datasetId } = req.params
+    const items = await datasetService
+      .getDeleted(datasetId)
       .catch(() => {
-        res.status(400)
-          .send({ message: "could not get items" })
+        res.status(400).send({ message: "could not get deleted items" })
       })
 
     res.send({ items })
   })
 
   router.route("/delete-items").post(async (req, res) => {
-    const ids = req.body.items.map(item => ObjectID(item))
-    const filter = {"_id": { $in: ids }}
-    const update = { $set: { "deleted_on": Date.now() }}
-    await db.collection("data")
-      .updateMany(filter, update)
-      .catch(err => {
-        res.status(400).send({message: err.errmsg})
+    const ids = req.body.items
+    
+    datasetService
+      .deleteItems(ids)
+      .catch(() => {
+        res.status(400).send({ message: "could not delete items" })
       })
     
     res.status(200).send({
@@ -149,38 +111,19 @@ const dataRouter = db => {
     })
   })
 
-  router.route("/:datasetId").post(async (req, res) => {
-    const document = await db.collection("data")
-      .insertOne({
-        "dataset_id": req.params.datasetId,
-        "data_values": req.body
-      }).catch(err => {
-        res.status(400).send({message: err.errmsg})
-      })
-    res.status(200).send({
-      message: "Item added to dataset",
-      item: document.ops[0]
-    })
-  })
-  
   // Used to update dataset details
   router.route("/:datasetId/update").post(async (req, res) => {
-    const filter = {"_id": ObjectID(req.params.datasetId)}
-    const { name, description } = req.body
-    const update = { $set: {
-      "details.name": name,
-      "details.description": description
-    }}
-
-    await db.collection("datasets")
-      .findOneAndUpdate(filter, update)
-      .catch(err => {
-        console.log(err)
-        res.status(400).send({message: err.errmsg})
+    const { datasetId } = req.params
+    const details = req.body
+    
+    datasetService
+      .updateDetails(datasetId, details)
+      .catch(() => {
+        res.status(400).send({ message: "could not update dataset details" })
       })
     
     res.status(200).send({
-      message: "Dataset updated",
+      message: "Dataset updated"
     })
   })
   
