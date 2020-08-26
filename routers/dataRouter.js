@@ -6,17 +6,16 @@ const { datasetService, templateService } = require('../services')
 const dataRouter = () => {
   const router = express.Router()
 
+  // dataset index route
   router.route("/").get(async (req, res) => {
     const datasets = await datasetService.list()
     res.json(datasets)
   })
 
+  // create dataset route: creates template and dataset
   router.route("/create").post(async (req, res) => {
     const { details, template } = req.body
-    details.created_at = Date.now()
-
-    const templateId = await templateService.create(template)
-    const datasetId = await datasetService.create(details, templateId)
+    const datasetId = await datasetService.create(details, template)
     
     res.json({ id: datasetId.valueOf() })
   })
@@ -97,17 +96,33 @@ const dataRouter = () => {
     res.send({ items })
   })
 
-  router.route("/delete-items").post(async (req, res) => {
+  router.route("/:datasetId/delete-items").post(async (req, res) => {
+    const { datasetId } = req.params
     const ids = req.body.items
     
     datasetService
-      .deleteItems(ids)
+      .deleteItems(datasetId, ids)
       .catch(() => {
         res.status(400).send({ message: "could not delete items" })
       })
     
     res.status(200).send({
       message: "Items deleted"
+    })
+  })
+  
+  router.route("/:datasetId/recover-deleted").post(async (req, res) => {
+    const { datasetId } = req.params
+    const ids = req.body.items
+    
+    datasetService
+      .recoverDeleted(datasetId, ids)
+      .catch(() => {
+        res.status(400).send({ message: "could not recover items" })
+      })
+    
+    res.status(200).send({
+      message: "Recovered items"
     })
   })
 

@@ -51,7 +51,7 @@ const getData = async (datasetId, deleted=false, sort) => {
   }
 
   const options = {
-    ...sort && { sort }
+    sort: sort || { "created_on": 1 }
   }
 
   const data = db.collection("data")
@@ -82,7 +82,11 @@ const addItem = async (datasetId, dataValues) => {
   const db = await mongoSetup.db("demo-db")
   const id = ObjectID(datasetId)
   
-  const document = { "dataset_id": id, "data_values": dataValues }
+  const document = {
+    "dataset_id": id,
+    "created_on": Date.now(),
+    "data_values": dataValues
+  }
   const item = await db.collection("data")
     .insertOne(document)
     .catch(console.error)
@@ -90,11 +94,12 @@ const addItem = async (datasetId, dataValues) => {
   return item.ops[0]
 }
 
-const deleteItems = async (ids) => {
+const deleteItems = async (datasetId, ids) => {
   const db = await mongoSetup.db("demo-db")
+  const id = ObjectID(datasetId)
   const idArray = ids.map(id => ObjectID(id))
   
-  const filter = {"_id": { $in: idArray }}
+  const filter = { "dataset_id": id, "_id": { $in: idArray }}
   const update = { $set: { "deleted_on": Date.now() }}
   
   const deleted = db.collection("data")
@@ -102,6 +107,21 @@ const deleteItems = async (ids) => {
     .catch(console.error)
 
   return deleted
+}
+
+const recoverDeleted = async (datasetId, ids) => {
+  const db = await mongoSetup.db("demo-db")
+  const id = ObjectID(datasetId)
+  const idArray = ids.map(id => ObjectID(id))
+  
+  const filter = { "dataset_id": id, "_id": { $in: idArray }}
+  const update = { $unset: { "deleted_on": "" }}
+  
+  const recovered = db.collection("data")
+    .updateMany(filter, update)
+    .catch(console.error)
+
+  return recovered
 }
 
 const updateDetails = async (datasetId, details) => {
@@ -127,5 +147,6 @@ module.exports = {
   hasDeleted,
   addItem,
   deleteItems,
+  recoverDeleted,
   updateDetails
 }

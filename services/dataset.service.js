@@ -10,7 +10,9 @@ const datasetService = {
       ...deleted && { deleted_on: set.deleted_on }
     }))
   },
-  create: async (details, templateId) => {
+  create: async (details, template) => {
+    details.created_at = Date.now()
+    const templateId = await templateService.create(template)
     const created = await datasetDb.create(details, templateId)
     return created._id
   },
@@ -29,16 +31,14 @@ const datasetService = {
 
     return { details, template, items, hasDeleted }
   },
-  addItem: async (datasetId, dataValues) => {
-    const item = datasetDb.addItem(datasetId, dataValues)
-    return item
-  },
-  deleteItems: async (ids) => {
-    datasetDb.deleteItems(ids)
-  },
-  getDeleted: async (datasetId) => {
-    return datasetDb.getData(datasetId, true, "deleted_on")
-  },
+  addItem: datasetDb.addItem,
+  deleteItems: datasetDb.deleteItems,
+  getDeleted: async (datasetId) => (
+    datasetDb.getData(datasetId, true, {
+      "deleted_on": -1
+    })
+  ),
+  recoverDeleted: datasetDb.recoverDeleted,
   updateDetails: datasetDb.updateDetails
 }
 
