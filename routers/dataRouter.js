@@ -1,13 +1,14 @@
 const express = require('express')
-const mongo = require('mongodb')
 
 const { datasetService, templateService } = require('../services')
 
-const dataRouter = () => {
+const dataRouter = (...middleWare) => {
   const router = express.Router()
+  middleWare.forEach(mw => router.use(mw))
 
   // dataset index route
-  router.route("/").get(async (req, res) => {
+  router.get("/", async (req, res) => {
+    console.log(req.user)
     const datasets = await datasetService.list()
     res.json(datasets)
   })
