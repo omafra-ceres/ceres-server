@@ -1,45 +1,116 @@
 const { datasetDb } = require("../db")
-const templateService = require('./template.service')
+const Template = require('./template.service')
 
-const datasetService = {
-  list: async (deleted=false) => {
-    const datasets = await datasetDb.list(deleted)
-    return datasets.map(set => ({
-      id: set._id.valueOf(),
-      ...set.details,
-      ...deleted && { deleted_on: set.deleted_on }
-    }))
-  },
-  create: async (details, template) => {
-    details.created_at = Date.now()
-    const templateId = await templateService.create(template)
-    const created = await datasetDb.create(details, templateId)
-    return created._id
-  },
-  get: async (datasetId) => {
-    const getDataset = datasetDb.findOne(datasetId)
-    const getItems = datasetDb.getData(datasetId)
-    const checkDeleted = datasetDb.hasDeleted(datasetId)
-    
-    const [{template_id, details}, items, hasDeleted] = await Promise.all([
-      getDataset,
-      getItems,
-      checkDeleted
-    ]).catch(console.error)
+const collaboratorPermissions = [
+  "add:items",
+  "delete:items",
+  "recover:items",
+  "edit:details",
+  "edit:template"
+]
 
-    const template = await templateService.findOne(template_id)
+const checkCollaboratorPermissions = check => check.every(ch => collaboratorPermissions.includes(ch))
 
-    return { details, template, items, hasDeleted }
-  },
-  addItem: datasetDb.addItem,
-  deleteItems: datasetDb.deleteItems,
-  getDeleted: async (datasetId) => (
-    datasetDb.getData(datasetId, true, {
-      "deleted_on": -1
-    })
-  ),
-  recoverDeleted: datasetDb.recoverDeleted,
-  updateDetails: datasetDb.updateDetails
+class Dataset {
+  constructor(id) {
+    this.id = id
+    this.info = datasetDb
+      .findOne(id)
+  }
+
+  get items() {
+    return datasetDb
+      .getData(this.id)
+  }
+
+  get deleted() {
+    return datasetDb
+      .getData(this.id, true, { "deleted_on": -1 })
+  }
+
+  get template() {
+    return (async () => {
+      const { template_id } = await this.info
+      const template = new Template(template_id)
+      return template.info
+    })()
+  }
+
+  get hasDeleted() {
+    return datasetDb
+      .hasDeleted(this.id)
+  }
+
+  get collaborators() {
+    return (async () => {
+      const { details: { collaborators }} = await this.info
+      return collaborators || []
+    })()
+  }
+
+  add(dataValues) {
+    return datasetDb
+      .addItem(this.id, dataValues)
+  }
+
+  deleteItems(ids) {
+    return datasetDb
+      .deleteItems(this.id, ids)
+  }
+
+  recoverDeleted(ids) {
+    return datasetDb
+      .recoverDeleted(this.id, ids)
+  }
+
+  update(updates) {
+    return datasetDb
+      .update(this.id, updates)
+  }
+
+  permissionCheck(userId) {
+    return (async () => {
+      const { owner_id, collaborator_ids } = await this.info
+      const isOwner = owner_id === userId
+      const isCollaborator = collaborator_ids && collaborator_ids.includes(userId)
+      return check => isOwner || (isCollaborator && checkCollaboratorPermissions(check))
+    })()
+  }
+
+  async addCollaborator(users) {
+    const { details, collaborator_ids } = await this.info
+    const updater = {
+      collaborator_ids: [collaborator_ids, ...users.map(user => user.id)],
+      details: {
+        collaborators: [
+          ...(details.collaborators || []),
+          ...users
+        ]
+      }
+    }
+    return datasetDb.update(this.id, updater)
+  }
+  
+  async removeCollaborator(userId) {
+    const { details, collaborator_ids } = await this.info
+    const updater = {
+      collaborator_ids: collaborator_ids.filter(id => id !== userId),
+      details: {
+        collaborators: details.collaborators.filter(col => col.id !== userId)
+      }
+    }
+    return datasetDb.update(this.id, updater)
+  }
+
+  static async create(userId, details, templateId) {
+    const created = await datasetDb
+      .create(userId, details, templateId)
+    return created._id.valueOf()
+  }
+
+  static list(options) {
+    return datasetDb.list(options)
+  }
 }
 
-module.exports = datasetService
+module.exports = Dataset

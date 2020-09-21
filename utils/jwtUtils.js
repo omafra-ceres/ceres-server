@@ -12,10 +12,14 @@ const checkJwt = jwt({
 
   audience: 'ceres-api',
   issuer: `https://ceres-demo.us.auth0.com/`,
-  algorithms: ['RS256']
+  algorithms: ['RS256'],
+  requestProperty: 'auth'
 })
 
-const checkRoles = roles => jwtAuthz(roles, { customScopeKey: 'http://omafra-ceres.herokuapp.com/roles' })
+const checkRoles = roles => jwtAuthz(roles, {
+  customUserKey: 'auth',
+  customScopeKey: 'http://omafra-ceres.herokuapp.com/roles'
+})
 
 module.exports = {
   checkJwt,

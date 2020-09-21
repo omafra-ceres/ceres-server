@@ -1,14 +1,19 @@
 const { templateDb } = require("../db")
 
-const templateService = {
-  create: async (template) => {
-    const created = await templateDb.create(template)
+class Template {
+  constructor(id) {
+    this.id = id
+    this.info = templateDb
+      .findOne(id)
+      .catch(err => { throw new Error(err) })
+  }
+
+  static async create(template) {
+    const created = await templateDb
+      .create(template)
+      .catch(error => { throw new Error(error) })
     return created._id
-  },
-  findOne: async (templateId) => {
-    const template = await templateDb.findOne(templateId)
-    return template
   }
 }
 
-module.exports = templateService
+module.exports = Template
