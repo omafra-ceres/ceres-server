@@ -18,6 +18,10 @@ const dataRouter = (...middleWare) => {
         .put(datasetPermission(["edit:details"]), dataController.update)
         .post(datasetPermission(["add:items"]), dataController.add)
   
+  router.route("/:datasetId/archive")
+        .put(datasetPermission(["recover:dataset"]), dataController.recoverDataset)
+        .post(datasetPermission(["delete:dataset"]), dataController.archiveDataset)
+  
   router.route("/:datasetId/deleted")
         .get(datasetPermission(["recover:items"]), dataController.deleted)
         .put(datasetPermission(["recover:items"]), dataController.recoverItems)

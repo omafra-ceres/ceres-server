@@ -84,6 +84,24 @@ const dataController = {
         res.status(400).send({ message: "Could not remove collaborator" })
       })
   },
+  recoverDataset: async (req, res) => {
+    req.dataset
+      .update({ deleted_on: null })
+      .then(() => { res.status(200).send() })
+      .catch((err) => {
+        console.error(err)
+        res.status(400).send({ message: "Could recover dataset" })
+      })
+  }, 
+  archiveDataset: async (req, res) => {
+    req.dataset
+      .update({ deleted_on: Date.now() })
+      .then(() => { res.status(200).send() })
+      .catch((err) => {
+        console.error(err)
+        res.status(400).send({ message: "Could delete dataset" })
+      })
+  },
 }
 
 module.exports = dataController
