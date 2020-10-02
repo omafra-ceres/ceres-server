@@ -8,6 +8,13 @@ const userController = {
       res.status(400).send(error)
     }
   },
+  getDeleted: async (req, res) => {
+    try {
+      res.json(await req.user.deleted)
+    } catch(error) {
+      res.status(400).send(error)
+    }
+  },
   createDataset: async (req, res) => {
     try {
       const { details, template } = req.body

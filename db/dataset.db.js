@@ -136,12 +136,23 @@ const recoverDeleted = async (datasetId, ids) => {
   return recovered
 }
 
+// updates values passed, if value of field === null will delete that field
 const update = async (datasetId, updates) => {
   const db = await mongoSetup.db("demo-db")
   const id = ObjectID(datasetId)
   
   const filter = { "_id": id }
-  const updaters = { $set: flattenObject(updates) }
+  const flattened = flattenObject(updates)
+  const toDelete = Object.keys(flattened).filter(key => flattened[key] === null)
+  const setters = Object.keys(flattened)
+    .filter(key => !toDelete.includes(key))
+    .reduce((acc, key) => ({ ...acc, [key]: flattened[key] }), {})
+  const unsetters = toDelete
+    .reduce((acc, key) => ({ ...acc, [key]: flattened[key] }), {})
+  const updaters = {
+    ...Object.keys(setters).length && { $set: setters },
+    ...Object.keys(unsetters).length && { $unset: unsetters }
+  }
 
   const updated = db.collection("datasets")
     .findOneAndUpdate(filter, updaters)

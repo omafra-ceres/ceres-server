@@ -8,6 +8,7 @@ const userRouter = (...middleWare) => {
 
   router.get("/users", userController.list)
   router.get("/datasets", userController.datasets)
+  router.get("/deleted", userController.getDeleted)
   router.post("/create-dataset", userController.createDataset)
 
   return router
