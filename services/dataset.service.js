@@ -80,7 +80,7 @@ class Dataset {
   async addCollaborator(users) {
     const { details, collaborator_ids } = await this.info
     const updater = {
-      collaborator_ids: [collaborator_ids, ...users.map(user => user.id)],
+      collaborator_ids: [...(collaborator_ids || []), ...users.map(user => user.id)],
       details: {
         collaborators: [
           ...(details.collaborators || []),

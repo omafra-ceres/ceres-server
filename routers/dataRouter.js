@@ -2,7 +2,8 @@ const express = require('express')
 
 const { dataController } = require('../controllers')
 const { Dataset } = require('../services')
-const { datasetPermission } = require('../utils/middleware')
+const { datasetPermission, setGlobalUser } = require('../utils/middleware')
+const { checkRoles } = require('../utils/jwtUtils')
 
 const dataRouter = (...middleWare) => {
   const router = express.Router()
@@ -12,6 +13,15 @@ const dataRouter = (...middleWare) => {
     req.dataset = new Dataset(id)
     next()
   })
+
+  router.route("/global")
+        .all(setGlobalUser)
+        .get(dataController.listGlobal)
+        .post(checkRoles(["admin"]), dataController.createGlobal)
+
+  router.put("/global/:datasetId", setGlobalUser, checkRoles(["admin"]), dataController.update)
+  router.post("/global/:datasetId/collaborators", setGlobalUser, checkRoles(["admin"]), dataController.addCollaborator)
+  router.post("/global/:datasetId/collaborators/delete", setGlobalUser, checkRoles(["admin"]), dataController.removeCollaborator)
 
   router.route("/:datasetId")
         .get(dataController.get)

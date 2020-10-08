@@ -9,6 +9,11 @@ const getUser = (req, res, next) => {
   next()
 }
 
+const setGlobalUser = (req, res, next) => {
+  req.user = new User("000")
+  next()
+}
+
 const datasetPermission = check => (
   async (req, res, next) => {
     const { user, dataset } = req
@@ -23,5 +28,6 @@ const datasetPermission = check => (
 
 module.exports = {
   getUser,
-  datasetPermission
+  datasetPermission,
+  setGlobalUser
 }

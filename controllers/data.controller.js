@@ -102,6 +102,23 @@ const dataController = {
         res.status(400).send({ message: "Could delete dataset" })
       })
   },
+  listGlobal: async (req, res) => {
+    try {
+      res.json(await req.user.datasets)
+    } catch(error) {
+      res.status(400).send(error)
+    }
+  },
+  createGlobal: async (req, res) => {
+    try {
+      const { details, template } = req.body
+      const datasetId = await req.user.createDataset(details, template)
+      res.json({ id: datasetId })
+    } catch(error) {
+      console.error(error)
+      res.status(400).send(error)
+    }
+  }
 }
 
 module.exports = dataController
