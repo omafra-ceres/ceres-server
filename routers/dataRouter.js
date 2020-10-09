@@ -23,6 +23,11 @@ const dataRouter = (...middleWare) => {
   router.post("/global/:datasetId/collaborators", setGlobalUser, checkRoles(["admin"]), dataController.addCollaborator)
   router.post("/global/:datasetId/collaborators/delete", setGlobalUser, checkRoles(["admin"]), dataController.removeCollaborator)
 
+  router.route("/global/:datasetId/archive")
+        .all(setGlobalUser)
+        .put(checkRoles(["admin"]), dataController.recoverDataset)
+        .post(checkRoles(["admin"]), dataController.archiveDataset)
+
   router.route("/:datasetId")
         .get(dataController.get)
         .put(datasetPermission(["edit:details"]), dataController.update)
