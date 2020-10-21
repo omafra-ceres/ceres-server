@@ -118,6 +118,15 @@ const dataController = {
       console.error(error)
       res.status(400).send(error)
     }
+  },
+  getGlobalOptions: async (req, res) => {
+    try {
+      const items = await req.dataset.items
+      res.json({ ops: items.map(item => Object.values(item.data_values)[0]) })
+    } catch(error) {
+      console.error(error)
+      res.status(400).send(error)
+    }
   }
 }
 

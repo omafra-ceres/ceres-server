@@ -19,6 +19,7 @@ const dataRouter = (...middleWare) => {
         .get(dataController.listGlobal)
         .post(checkRoles(["admin"]), dataController.createGlobal)
 
+  router.get("/global/:datasetId/options", setGlobalUser, dataController.getGlobalOptions)
   router.put("/global/:datasetId", setGlobalUser, checkRoles(["admin"]), dataController.update)
   router.post("/global/:datasetId/collaborators", setGlobalUser, checkRoles(["admin"]), dataController.addCollaborator)
   router.post("/global/:datasetId/collaborators/delete", setGlobalUser, checkRoles(["admin"]), dataController.removeCollaborator)
