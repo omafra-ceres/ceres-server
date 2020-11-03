@@ -1,9 +1,9 @@
-const { userDb } = require('../db')
+const User = require('./user.service')
 
 const adminService = {
   users: {
-    list: userDb.list,
-    create: userDb.create
+    list: User.list,
+    create: User.create
   }
 }
 

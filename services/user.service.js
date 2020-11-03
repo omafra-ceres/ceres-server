@@ -1,7 +1,7 @@
 const Template = require("./template.service")
 const Dataset = require("./dataset.service")
 
-const { userDb } = require("../db")
+const { authClient } = require('../utils/authUtils')
 const { getUserId } = require('../utils/authUtils')
 
 class User {
@@ -41,12 +41,22 @@ class User {
   }
 
   static async list() {
-    const users = await userDb.list()
+    const users = await authClient.users.getAll()
     return users.map(user => {
       const id = getUserId({ sub: user.user_id })
       const { name, email } = user
       return { id, name, email }
     })
+  }
+
+  static create(userData) {
+    const data = {
+      ...userData,
+      "connection": "email",
+      "email_verified": true,
+      "verify_email": false
+    }
+    return authClient.users.create(data)
   }
 }
 

@@ -13,7 +13,6 @@ const adminRouter = (...middleWare) => {
         res.status(400).send({ message: "could not get users" })
       })
     if (users) {
-      console.log(users)
       res.status(200).json(users)
     }
   })

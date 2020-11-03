@@ -1,8 +1,8 @@
-const { userDb } = require('../db')
+const User = require('./user.service')
 
 class Demo {
   static create(user) {
-    return userDb.create({ ...user })
+    return User.create(user)
   }
 }
 
