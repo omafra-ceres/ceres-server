@@ -1,4 +1,4 @@
-const User = require('./user.service')
+const { User } = require('../services')
 
 const adminController = {
   users: {
