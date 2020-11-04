@@ -1,10 +1,10 @@
 const User = require('./user.service')
 
-const adminService = {
+const adminController = {
   users: {
     list: User.list,
     create: User.create
   }
 }
 
-module.exports = adminService
+module.exports = adminController
