@@ -9,3 +9,7 @@ The API server for the Ceres alpha project developed by the Code for Canada team
 1. Install dependencies — `npm i`
 1. Add environment variables as per `.env.example`
 1. Get started! Run either `npm run dev` or `npm start`
+
+## Deploy to Heroku
+
+[Heroku documentation: Deploying Node.js Apps on Heroku ](https://devcenter.heroku.com/articles/deploying-nodejs)
