@@ -1,5 +1,5 @@
 const ManagementClient = require('auth0').ManagementClient
-const mongoSetup = require('../mongoSetup')
+const { getDb: db } = require('../mongoSetup')
 const ObjectID = require('mongodb').ObjectID
 
 const authClient = new ManagementClient({
@@ -22,7 +22,6 @@ const collaboratorPermissions = [
 const checkCollPerm = check => check.every(ch => collaboratorPermissions.includes(ch))
 
 const getPermissionCheck = async (userId, datasetId) => {
-  const db = await mongoSetup.db("demo-db")
   const dataset = ObjectID(datasetId)
   const filter = {
     "_id": dataset,
@@ -32,7 +31,7 @@ const getPermissionCheck = async (userId, datasetId) => {
     ]
   }
   
-  const response = await db.collection("datasets")
+  const response = await db().collection("datasets")
     .findOne(filter, {
       projection: {
         owner_id: 1,

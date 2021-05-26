@@ -1,4 +1,4 @@
-const { datasetDb } = require("../db")
+const { dataset } = require("../db")
 const Template = require('./template.service')
 
 const collaboratorPermissions = [
@@ -14,17 +14,17 @@ const checkCollaboratorPermissions = check => check.every(ch => collaboratorPerm
 class Dataset {
   constructor(id) {
     this.id = id
-    this.info = datasetDb
+    this.info = dataset
       .findOne(id)
   }
 
   get items() {
-    return datasetDb
+    return dataset
       .getData(this.id)
   }
 
   get deleted() {
-    return datasetDb
+    return dataset
       .getData(this.id, true, { "deleted_on": -1 })
   }
 
@@ -37,7 +37,7 @@ class Dataset {
   }
 
   get hasDeleted() {
-    return datasetDb
+    return dataset
       .hasDeleted(this.id)
   }
 
@@ -49,22 +49,22 @@ class Dataset {
   }
 
   add(dataValues) {
-    return datasetDb
+    return dataset
       .addItem(this.id, dataValues)
   }
 
   deleteItems(ids) {
-    return datasetDb
+    return dataset
       .deleteItems(this.id, ids)
   }
 
   recoverDeleted(ids) {
-    return datasetDb
+    return dataset
       .recoverDeleted(this.id, ids)
   }
 
   update(updates) {
-    return datasetDb
+    return dataset
       .update(this.id, updates)
   }
 
@@ -88,7 +88,7 @@ class Dataset {
         ]
       }
     }
-    return datasetDb.update(this.id, updater)
+    return dataset.update(this.id, updater)
   }
   
   async removeCollaborator(userId) {
@@ -99,17 +99,17 @@ class Dataset {
         collaborators: details.collaborators.filter(col => col.id !== userId)
       }
     }
-    return datasetDb.update(this.id, updater)
+    return dataset.update(this.id, updater)
   }
 
   static async create(userId, details, templateId) {
-    const created = await datasetDb
+    const created = await dataset
       .create(userId, details, templateId)
     return created._id.valueOf()
   }
 
   static list(options) {
-    return datasetDb.list(options)
+    return dataset.list(options)
   }
 }
 
