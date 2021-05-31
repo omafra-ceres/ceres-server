@@ -1,0 +1,77 @@
+[
+  {
+    "title": "Crops",
+    "type": "object",
+    "required": [
+      "d20e6d61-d168-4904-abe5-7585c633d113",
+      "8e90c7c9-c5f8-422b-981f-ef3bc9e5aee8"
+    ],
+    "properties": {
+      "d20e6d61-d168-4904-abe5-7585c633d113": {
+        "title": "Name",
+        "type": "string"
+      },
+      "8e90c7c9-c5f8-422b-981f-ef3bc9e5aee8": {
+        "title": "Scientific name",
+        "type": "string"
+      },
+      "b734c2ac-9651-4da5-80b9-41ddad9b518a": {
+        "title": "Alternative names",
+        "type": "string"
+      }
+    },
+    "owner_id": "000"
+  },
+  {
+    "title": "Stem and Bulb Nematode Management Trial 2018",
+    "type": "object",
+    "required": [
+      "e04059a7-5d9e-4d87-964c-58dd78b9cf1d",
+      "ab6299a4-cbd1-4542-a355-37f263d3ca58",
+      "af3c5805-8002-4930-8760-840740772fd1",
+      "80675213-fc06-400d-aa28-84d3171bf2b6",
+      "740bea3b-67c2-43ee-afa3-8487af33924a",
+      "bd5a3fdf-3ff7-4367-947e-46612e08517f",
+      "e7d45446-0b75-41cc-8958-e0578be72b6d",
+      "624ec5c9-ce8a-4cfb-b0e8-901d4fd8622d"
+    ],
+    "properties": {
+      "e04059a7-5d9e-4d87-964c-58dd78b9cf1d": {
+        "title": "Plot no.",
+        "type": "number"
+      },
+      "ab6299a4-cbd1-4542-a355-37f263d3ca58": {
+        "title": "Treatment no.",
+        "type": "number"
+      },
+      "af3c5805-8002-4930-8760-840740772fd1": {
+        "title": "Treatment",
+        "type": "string"
+      },
+      "fea60700-8c8d-4ffe-bb73-9a8397b5aa17": {
+        "title": "Timing",
+        "type": "string"
+      },
+      "80675213-fc06-400d-aa28-84d3171bf2b6": {
+        "title": "Root plate damage",
+        "type": "number"
+      },
+      "740bea3b-67c2-43ee-afa3-8487af33924a": {
+        "title": "Nematodes/g",
+        "type": "number"
+      },
+      "bd5a3fdf-3ff7-4367-947e-46612e08517f": {
+        "title": "Total bulbs",
+        "type": "number"
+      },
+      "e7d45446-0b75-41cc-8958-e0578be72b6d": {
+        "title": "Avg. bulb diameter (cm)",
+        "type": "number"
+      },
+      "624ec5c9-ce8a-4cfb-b0e8-901d4fd8622d": {
+        "title": "Marketable bulbs #",
+        "type": "number"
+      }
+    }
+  }
+]

@@ -1,0 +1,21 @@
+[
+  {
+    "owner_id": "000",
+    "template_id": 0,
+    "details": {
+      "name": "Crops",
+      "description": "Crops managed by OMAFRA crop specialists"
+    }
+  },
+  {
+    "owner_id": "1",
+    "template_id": 1,
+    "details": {
+      "name": "Stem and Bulb Nematode Management Trial 2018",
+      "owner": {
+        "name": "Zola McAdie",
+        "email": "zola.mcadie@codefor.ca"
+      }
+    }
+  }
+]

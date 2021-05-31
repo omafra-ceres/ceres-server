@@ -1,6 +1,3 @@
-const { Dataset } = require('../services')
-const { authService } = require('../utils/authUtils')
-
 const dataController = {
   get: async (req, res) => {
     try {
@@ -12,6 +9,7 @@ const dataController = {
       ])
       res.send({ dataset: info, items, template, hasDeleted })
     } catch (error) {
+      console.error(error)
       res.status(400).send(error)
     }
   },
