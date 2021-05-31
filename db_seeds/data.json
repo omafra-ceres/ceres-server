@@ -1,0 +1,424 @@
+[
+  {
+    "dataset_id": 0,
+    "data_values": {
+      "d20e6d61-d168-4904-abe5-7585c633d113": "Potato",
+      "8e90c7c9-c5f8-422b-981f-ef3bc9e5aee8": "Solanum tuberosum",
+      "b734c2ac-9651-4da5-80b9-41ddad9b518a": "spud, tater, tuber"
+    }
+  },
+  {
+    "dataset_id": 0,
+    "data_values": {
+      "d20e6d61-d168-4904-abe5-7585c633d113": "Corn",
+      "8e90c7c9-c5f8-422b-981f-ef3bc9e5aee8": "Zea mays",
+      "b734c2ac-9651-4da5-80b9-41ddad9b518a": "maize"
+    }
+  },
+  {
+    "dataset_id": 0,
+    "data_values": {
+      "d20e6d61-d168-4904-abe5-7585c633d113": "Beet",
+      "8e90c7c9-c5f8-422b-981f-ef3bc9e5aee8": "Beta vulgaris",
+      "b734c2ac-9651-4da5-80b9-41ddad9b518a": "beetroot, blood turnip"
+    }
+  },
+  {
+    "dataset_id": 0,
+    "data_values": {
+      "d20e6d61-d168-4904-abe5-7585c633d113": "Garlic",
+      "8e90c7c9-c5f8-422b-981f-ef3bc9e5aee8": "Allium sativum"
+    }
+  },
+  {
+    "dataset_id": 0,
+    "data_values": {
+      "d20e6d61-d168-4904-abe5-7585c633d113": "Canola",
+      "8e90c7c9-c5f8-422b-981f-ef3bc9e5aee8": "Brassica napus",
+      "b734c2ac-9651-4da5-80b9-41ddad9b518a": "Rapeseed, colza, siberian kale, swedish turnip"
+    }
+  },
+  {
+    "dataset_id": 0,
+    "data_values": {
+      "d20e6d61-d168-4904-abe5-7585c633d113": "Soybean",
+      "8e90c7c9-c5f8-422b-981f-ef3bc9e5aee8": "Glycine max",
+      "b734c2ac-9651-4da5-80b9-41ddad9b518a": "Soya bean, soyabean"
+    }
+  },
+  {
+    "dataset_id": 1,
+    "created_on": 1.598892675551E+12,
+    "data_values": {
+      "e04059a7-5d9e-4d87-964c-58dd78b9cf1d": 101,
+      "ab6299a4-cbd1-4542-a355-37f263d3ca58": 1,
+      "af3c5805-8002-4930-8760-840740772fd1": "Clean Seed",
+      "80675213-fc06-400d-aa28-84d3171bf2b6": 0.9,
+      "740bea3b-67c2-43ee-afa3-8487af33924a": 4,
+      "bd5a3fdf-3ff7-4367-947e-46612e08517f": 24,
+      "e7d45446-0b75-41cc-8958-e0578be72b6d": 5.1,
+      "624ec5c9-ce8a-4cfb-b0e8-901d4fd8622d": 17
+    }
+  },
+  {
+    "dataset_id": 1,
+    "created_on": 1.598892736961E+12,
+    "data_values": {
+      "e04059a7-5d9e-4d87-964c-58dd78b9cf1d": 102,
+      "ab6299a4-cbd1-4542-a355-37f263d3ca58": 2,
+      "af3c5805-8002-4930-8760-840740772fd1": "Agri-Mek SC clove soaking + 0.25% non-ionic surfactant",
+      "fea60700-8c8d-4ffe-bb73-9a8397b5aa17": "Prior to planting",
+      "80675213-fc06-400d-aa28-84d3171bf2b6": 0.3,
+      "740bea3b-67c2-43ee-afa3-8487af33924a": 4,
+      "bd5a3fdf-3ff7-4367-947e-46612e08517f": 28,
+      "e7d45446-0b75-41cc-8958-e0578be72b6d": 5,
+      "624ec5c9-ce8a-4cfb-b0e8-901d4fd8622d": 22
+    }
+  },
+  {
+    "dataset_id": 1,
+    "created_on": 1.598892775938E+12,
+    "data_values": {
+      "e04059a7-5d9e-4d87-964c-58dd78b9cf1d": 103,
+      "ab6299a4-cbd1-4542-a355-37f263d3ca58": 3,
+      "af3c5805-8002-4930-8760-840740772fd1": "Water clove soaking",
+      "fea60700-8c8d-4ffe-bb73-9a8397b5aa17": "Prior to planting",
+      "80675213-fc06-400d-aa28-84d3171bf2b6": 1.8,
+      "740bea3b-67c2-43ee-afa3-8487af33924a": 11,
+      "bd5a3fdf-3ff7-4367-947e-46612e08517f": 28,
+      "e7d45446-0b75-41cc-8958-e0578be72b6d": 4.9,
+      "624ec5c9-ce8a-4cfb-b0e8-901d4fd8622d": 12
+    }
+  },
+  {
+    "dataset_id": 1,
+    "created_on": 1.598892809837E+12,
+    "data_values": {
+      "e04059a7-5d9e-4d87-964c-58dd78b9cf1d": 104,
+      "ab6299a4-cbd1-4542-a355-37f263d3ca58": 4,
+      "af3c5805-8002-4930-8760-840740772fd1": "Velum Prime Drench",
+      "fea60700-8c8d-4ffe-bb73-9a8397b5aa17": "In furrow fall",
+      "80675213-fc06-400d-aa28-84d3171bf2b6": 0.1,
+      "740bea3b-67c2-43ee-afa3-8487af33924a": 0,
+      "bd5a3fdf-3ff7-4367-947e-46612e08517f": 29,
+      "e7d45446-0b75-41cc-8958-e0578be72b6d": 5.4,
+      "624ec5c9-ce8a-4cfb-b0e8-901d4fd8622d": 24
+    }
+  },
+  {
+    "dataset_id": 1,
+    "created_on": 1.59889284266E+12,
+    "data_values": {
+      "e04059a7-5d9e-4d87-964c-58dd78b9cf1d": 105,
+      "ab6299a4-cbd1-4542-a355-37f263d3ca58": 5,
+      "af3c5805-8002-4930-8760-840740772fd1": "Water",
+      "fea60700-8c8d-4ffe-bb73-9a8397b5aa17": "In furrow fall",
+      "80675213-fc06-400d-aa28-84d3171bf2b6": 2.4,
+      "740bea3b-67c2-43ee-afa3-8487af33924a": 1075,
+      "bd5a3fdf-3ff7-4367-947e-46612e08517f": 27,
+      "e7d45446-0b75-41cc-8958-e0578be72b6d": 4.5,
+      "624ec5c9-ce8a-4cfb-b0e8-901d4fd8622d": 8
+    }
+  },
+  {
+    "dataset_id": 1,
+    "created_on": 1.598892905261E+12,
+    "data_values": {
+      "e04059a7-5d9e-4d87-964c-58dd78b9cf1d": 201,
+      "ab6299a4-cbd1-4542-a355-37f263d3ca58": 3,
+      "af3c5805-8002-4930-8760-840740772fd1": "Water clove soaking",
+      "fea60700-8c8d-4ffe-bb73-9a8397b5aa17": "Prior to planting",
+      "80675213-fc06-400d-aa28-84d3171bf2b6": 1.8,
+      "740bea3b-67c2-43ee-afa3-8487af33924a": 19,
+      "e7d45446-0b75-41cc-8958-e0578be72b6d": 4.8,
+      "624ec5c9-ce8a-4cfb-b0e8-901d4fd8622d": 9,
+      "bd5a3fdf-3ff7-4367-947e-46612e08517f": 28
+    }
+  },
+  {
+    "dataset_id": 1,
+    "created_on": 1.598892957877E+12,
+    "data_values": {
+      "e04059a7-5d9e-4d87-964c-58dd78b9cf1d": 202,
+      "ab6299a4-cbd1-4542-a355-37f263d3ca58": 4,
+      "af3c5805-8002-4930-8760-840740772fd1": "Velum Prime Drench",
+      "fea60700-8c8d-4ffe-bb73-9a8397b5aa17": "In furrow fall",
+      "80675213-fc06-400d-aa28-84d3171bf2b6": 0.4,
+      "740bea3b-67c2-43ee-afa3-8487af33924a": 0,
+      "bd5a3fdf-3ff7-4367-947e-46612e08517f": 27,
+      "e7d45446-0b75-41cc-8958-e0578be72b6d": 5.5,
+      "624ec5c9-ce8a-4cfb-b0e8-901d4fd8622d": 23
+    }
+  },
+  {
+    "dataset_id": 1,
+    "created_on": 1.598892990186E+12,
+    "data_values": {
+      "e04059a7-5d9e-4d87-964c-58dd78b9cf1d": 203,
+      "ab6299a4-cbd1-4542-a355-37f263d3ca58": 1,
+      "af3c5805-8002-4930-8760-840740772fd1": "Clean Seed",
+      "80675213-fc06-400d-aa28-84d3171bf2b6": 0.7,
+      "740bea3b-67c2-43ee-afa3-8487af33924a": 0,
+      "bd5a3fdf-3ff7-4367-947e-46612e08517f": 26,
+      "e7d45446-0b75-41cc-8958-e0578be72b6d": 5.7,
+      "624ec5c9-ce8a-4cfb-b0e8-901d4fd8622d": 24
+    }
+  },
+  {
+    "dataset_id": 1,
+    "created_on": 1.598893021056E+12,
+    "data_values": {
+      "e04059a7-5d9e-4d87-964c-58dd78b9cf1d": 204,
+      "ab6299a4-cbd1-4542-a355-37f263d3ca58": 5,
+      "af3c5805-8002-4930-8760-840740772fd1": "Water",
+      "fea60700-8c8d-4ffe-bb73-9a8397b5aa17": "In furrow fall",
+      "80675213-fc06-400d-aa28-84d3171bf2b6": 3,
+      "740bea3b-67c2-43ee-afa3-8487af33924a": 76,
+      "bd5a3fdf-3ff7-4367-947e-46612e08517f": 25,
+      "e7d45446-0b75-41cc-8958-e0578be72b6d": 4.5,
+      "624ec5c9-ce8a-4cfb-b0e8-901d4fd8622d": 2
+    }
+  },
+  {
+    "dataset_id": 1,
+    "created_on": 1.598893053823E+12,
+    "data_values": {
+      "e04059a7-5d9e-4d87-964c-58dd78b9cf1d": 205,
+      "ab6299a4-cbd1-4542-a355-37f263d3ca58": 2,
+      "af3c5805-8002-4930-8760-840740772fd1": "Agri-Mek SC clove soaking + 0.25% non-ionic surfactant",
+      "fea60700-8c8d-4ffe-bb73-9a8397b5aa17": "Prior to planting",
+      "80675213-fc06-400d-aa28-84d3171bf2b6": 0.9,
+      "740bea3b-67c2-43ee-afa3-8487af33924a": 12,
+      "bd5a3fdf-3ff7-4367-947e-46612e08517f": 24,
+      "e7d45446-0b75-41cc-8958-e0578be72b6d": 5,
+      "624ec5c9-ce8a-4cfb-b0e8-901d4fd8622d": 13
+    }
+  },
+  {
+    "dataset_id": 1,
+    "created_on": 1.598893098737E+12,
+    "data_values": {
+      "e04059a7-5d9e-4d87-964c-58dd78b9cf1d": 301,
+      "ab6299a4-cbd1-4542-a355-37f263d3ca58": 2,
+      "af3c5805-8002-4930-8760-840740772fd1": "Agri-Mek SC clove soaking + 0.25% non-ionic surfactant",
+      "fea60700-8c8d-4ffe-bb73-9a8397b5aa17": "Prior to planting",
+      "80675213-fc06-400d-aa28-84d3171bf2b6": 1,
+      "740bea3b-67c2-43ee-afa3-8487af33924a": 0,
+      "bd5a3fdf-3ff7-4367-947e-46612e08517f": 23,
+      "e7d45446-0b75-41cc-8958-e0578be72b6d": 5,
+      "624ec5c9-ce8a-4cfb-b0e8-901d4fd8622d": 17
+    },
+    "deleted_on": 1.603202665148E+12
+  },
+  {
+    "dataset_id": 1,
+    "created_on": 1.59889313299E+12,
+    "data_values": {
+      "e04059a7-5d9e-4d87-964c-58dd78b9cf1d": 302,
+      "ab6299a4-cbd1-4542-a355-37f263d3ca58": 5,
+      "af3c5805-8002-4930-8760-840740772fd1": "Water",
+      "fea60700-8c8d-4ffe-bb73-9a8397b5aa17": "In furrow fall",
+      "80675213-fc06-400d-aa28-84d3171bf2b6": 1.8,
+      "740bea3b-67c2-43ee-afa3-8487af33924a": 104,
+      "bd5a3fdf-3ff7-4367-947e-46612e08517f": 28,
+      "e7d45446-0b75-41cc-8958-e0578be72b6d": 4.8,
+      "624ec5c9-ce8a-4cfb-b0e8-901d4fd8622d": 11
+    },
+    "deleted_on": 1.603202669681E+12
+  },
+  {
+    "dataset_id": 1,
+    "created_on": 1.598893191281E+12,
+    "data_values": {
+      "e04059a7-5d9e-4d87-964c-58dd78b9cf1d": 303,
+      "ab6299a4-cbd1-4542-a355-37f263d3ca58": 4,
+      "af3c5805-8002-4930-8760-840740772fd1": "Velum Prime Drench",
+      "fea60700-8c8d-4ffe-bb73-9a8397b5aa17": "In furrow fall",
+      "80675213-fc06-400d-aa28-84d3171bf2b6": 0.7,
+      "740bea3b-67c2-43ee-afa3-8487af33924a": 0,
+      "bd5a3fdf-3ff7-4367-947e-46612e08517f": 27,
+      "e7d45446-0b75-41cc-8958-e0578be72b6d": 4.6,
+      "624ec5c9-ce8a-4cfb-b0e8-901d4fd8622d": 22
+    }
+  },
+  {
+    "dataset_id": 1,
+    "created_on": 1.598893244005E+12,
+    "data_values": {
+      "e04059a7-5d9e-4d87-964c-58dd78b9cf1d": 304,
+      "ab6299a4-cbd1-4542-a355-37f263d3ca58": 1,
+      "af3c5805-8002-4930-8760-840740772fd1": "Clean Seed",
+      "80675213-fc06-400d-aa28-84d3171bf2b6": 0.6,
+      "740bea3b-67c2-43ee-afa3-8487af33924a": 0,
+      "bd5a3fdf-3ff7-4367-947e-46612e08517f": 26,
+      "e7d45446-0b75-41cc-8958-e0578be72b6d": 5.7,
+      "624ec5c9-ce8a-4cfb-b0e8-901d4fd8622d": 24
+    }
+  },
+  {
+    "dataset_id": 1,
+    "created_on": 1.598893340147E+12,
+    "data_values": {
+      "e04059a7-5d9e-4d87-964c-58dd78b9cf1d": 305,
+      "ab6299a4-cbd1-4542-a355-37f263d3ca58": 3,
+      "af3c5805-8002-4930-8760-840740772fd1": "Water clove soaking",
+      "fea60700-8c8d-4ffe-bb73-9a8397b5aa17": "Prior to planting",
+      "80675213-fc06-400d-aa28-84d3171bf2b6": 2.3,
+      "740bea3b-67c2-43ee-afa3-8487af33924a": 51,
+      "bd5a3fdf-3ff7-4367-947e-46612e08517f": 24,
+      "e7d45446-0b75-41cc-8958-e0578be72b6d": 4.5,
+      "624ec5c9-ce8a-4cfb-b0e8-901d4fd8622d": 8
+    }
+  },
+  {
+    "dataset_id": 1,
+    "created_on": 1.598893486797E+12,
+    "data_values": {
+      "e04059a7-5d9e-4d87-964c-58dd78b9cf1d": 401,
+      "ab6299a4-cbd1-4542-a355-37f263d3ca58": 4,
+      "af3c5805-8002-4930-8760-840740772fd1": "Velum Prime Drench",
+      "fea60700-8c8d-4ffe-bb73-9a8397b5aa17": "In furrow fall",
+      "80675213-fc06-400d-aa28-84d3171bf2b6": 0.4,
+      "740bea3b-67c2-43ee-afa3-8487af33924a": 0,
+      "bd5a3fdf-3ff7-4367-947e-46612e08517f": 28,
+      "e7d45446-0b75-41cc-8958-e0578be72b6d": 5.4,
+      "624ec5c9-ce8a-4cfb-b0e8-901d4fd8622d": 25
+    }
+  },
+  {
+    "dataset_id": 1,
+    "created_on": 1.598893552177E+12,
+    "data_values": {
+      "e04059a7-5d9e-4d87-964c-58dd78b9cf1d": 402,
+      "ab6299a4-cbd1-4542-a355-37f263d3ca58": 3,
+      "af3c5805-8002-4930-8760-840740772fd1": "Water clove soaking",
+      "fea60700-8c8d-4ffe-bb73-9a8397b5aa17": "Prior to planting",
+      "80675213-fc06-400d-aa28-84d3171bf2b6": 2.1,
+      "740bea3b-67c2-43ee-afa3-8487af33924a": 112,
+      "bd5a3fdf-3ff7-4367-947e-46612e08517f": 25,
+      "e7d45446-0b75-41cc-8958-e0578be72b6d": 5.1,
+      "624ec5c9-ce8a-4cfb-b0e8-901d4fd8622d": 11
+    }
+  },
+  {
+    "dataset_id": 1,
+    "created_on": 1.59889358288E+12,
+    "data_values": {
+      "e04059a7-5d9e-4d87-964c-58dd78b9cf1d": 403,
+      "ab6299a4-cbd1-4542-a355-37f263d3ca58": 5,
+      "af3c5805-8002-4930-8760-840740772fd1": "Water",
+      "fea60700-8c8d-4ffe-bb73-9a8397b5aa17": "In furrow fall",
+      "80675213-fc06-400d-aa28-84d3171bf2b6": 2.4,
+      "740bea3b-67c2-43ee-afa3-8487af33924a": 49,
+      "bd5a3fdf-3ff7-4367-947e-46612e08517f": 27,
+      "e7d45446-0b75-41cc-8958-e0578be72b6d": 4.4,
+      "624ec5c9-ce8a-4cfb-b0e8-901d4fd8622d": 5
+    }
+  },
+  {
+    "dataset_id": 1,
+    "created_on": 1.598893618931E+12,
+    "data_values": {
+      "e04059a7-5d9e-4d87-964c-58dd78b9cf1d": 404,
+      "ab6299a4-cbd1-4542-a355-37f263d3ca58": 2,
+      "af3c5805-8002-4930-8760-840740772fd1": "Agri-Mek SC clove soaking + 0.25% non-ionic surfactant",
+      "fea60700-8c8d-4ffe-bb73-9a8397b5aa17": "Prior to planting",
+      "80675213-fc06-400d-aa28-84d3171bf2b6": 1,
+      "740bea3b-67c2-43ee-afa3-8487af33924a": 2,
+      "bd5a3fdf-3ff7-4367-947e-46612e08517f": 26,
+      "e7d45446-0b75-41cc-8958-e0578be72b6d": 5.3,
+      "624ec5c9-ce8a-4cfb-b0e8-901d4fd8622d": 24
+    }
+  },
+  {
+    "dataset_id": 1,
+    "created_on": 1.598893644824E+12,
+    "data_values": {
+      "e04059a7-5d9e-4d87-964c-58dd78b9cf1d": 405,
+      "ab6299a4-cbd1-4542-a355-37f263d3ca58": 1,
+      "af3c5805-8002-4930-8760-840740772fd1": "Clean Seed",
+      "80675213-fc06-400d-aa28-84d3171bf2b6": 0.7,
+      "740bea3b-67c2-43ee-afa3-8487af33924a": 0,
+      "bd5a3fdf-3ff7-4367-947e-46612e08517f": 27,
+      "e7d45446-0b75-41cc-8958-e0578be72b6d": 5.1,
+      "624ec5c9-ce8a-4cfb-b0e8-901d4fd8622d": 25
+    }
+  },
+  {
+    "dataset_id": 1,
+    "created_on": 1.602789085617E+12,
+    "data_values": {
+      "e04059a7-5d9e-4d87-964c-58dd78b9cf1d": 401,
+      "ab6299a4-cbd1-4542-a355-37f263d3ca58": 1,
+      "af3c5805-8002-4930-8760-840740772fd1": "Clean Seed",
+      "80675213-fc06-400d-aa28-84d3171bf2b6": 0.3,
+      "740bea3b-67c2-43ee-afa3-8487af33924a": 4,
+      "bd5a3fdf-3ff7-4367-947e-46612e08517f": 27,
+      "e7d45446-0b75-41cc-8958-e0578be72b6d": 8,
+      "624ec5c9-ce8a-4cfb-b0e8-901d4fd8622d": 57
+    },
+    "deleted_on": 1.602789100064E+12
+  },
+  {
+    "dataset_id": 1,
+    "created_on": 1.60278921871E+12,
+    "data_values": {
+      "e04059a7-5d9e-4d87-964c-58dd78b9cf1d": 501,
+      "ab6299a4-cbd1-4542-a355-37f263d3ca58": 3,
+      "af3c5805-8002-4930-8760-840740772fd1": "Water clove soaking",
+      "fea60700-8c8d-4ffe-bb73-9a8397b5aa17": "Prior to planting",
+      "80675213-fc06-400d-aa28-84d3171bf2b6": 0.4,
+      "740bea3b-67c2-43ee-afa3-8487af33924a": 8,
+      "bd5a3fdf-3ff7-4367-947e-46612e08517f": 27,
+      "e7d45446-0b75-41cc-8958-e0578be72b6d": 15,
+      "624ec5c9-ce8a-4cfb-b0e8-901d4fd8622d": 22
+    },
+    "deleted_on": 1.60278925852E+12
+  },
+  {
+    "dataset_id": 1,
+    "created_on": 1.602789307892E+12,
+    "data_values": {
+      "e04059a7-5d9e-4d87-964c-58dd78b9cf1d": 501,
+      "ab6299a4-cbd1-4542-a355-37f263d3ca58": 2,
+      "af3c5805-8002-4930-8760-840740772fd1": "Clean Seed",
+      "80675213-fc06-400d-aa28-84d3171bf2b6": 0.3,
+      "740bea3b-67c2-43ee-afa3-8487af33924a": 8,
+      "bd5a3fdf-3ff7-4367-947e-46612e08517f": 27,
+      "e7d45446-0b75-41cc-8958-e0578be72b6d": 15,
+      "624ec5c9-ce8a-4cfb-b0e8-901d4fd8622d": 22
+    },
+    "deleted_on": 1.60279072453E+12
+  },
+  {
+    "dataset_id": 1,
+    "created_on": 1.602789367162E+12,
+    "data_values": {
+      "e04059a7-5d9e-4d87-964c-58dd78b9cf1d": 501,
+      "ab6299a4-cbd1-4542-a355-37f263d3ca58": 1,
+      "af3c5805-8002-4930-8760-840740772fd1": "Clean Seed",
+      "80675213-fc06-400d-aa28-84d3171bf2b6": 0.3,
+      "740bea3b-67c2-43ee-afa3-8487af33924a": 8,
+      "bd5a3fdf-3ff7-4367-947e-46612e08517f": 27,
+      "e7d45446-0b75-41cc-8958-e0578be72b6d": 8,
+      "624ec5c9-ce8a-4cfb-b0e8-901d4fd8622d": 22
+    },
+    "deleted_on": 1.602790726414E+12
+  },
+  {
+    "dataset_id": 1,
+    "created_on": 1.603202534025E+12,
+    "data_values": {
+      "e04059a7-5d9e-4d87-964c-58dd78b9cf1d": 501,
+      "ab6299a4-cbd1-4542-a355-37f263d3ca58": 1,
+      "af3c5805-8002-4930-8760-840740772fd1": "Clean Seed",
+      "fea60700-8c8d-4ffe-bb73-9a8397b5aa17": "Prior to planting",
+      "80675213-fc06-400d-aa28-84d3171bf2b6": 0.4,
+      "740bea3b-67c2-43ee-afa3-8487af33924a": 27,
+      "bd5a3fdf-3ff7-4367-947e-46612e08517f": 12,
+      "e7d45446-0b75-41cc-8958-e0578be72b6d": 22,
+      "624ec5c9-ce8a-4cfb-b0e8-901d4fd8622d": 1
+    },
+    "deleted_on": 1.604593394963E+12
+  }
+]
