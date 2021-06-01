@@ -8,9 +8,9 @@ class Template {
       .catch(err => { throw new Error(err) })
   }
 
-  static async create(template) {
+  static async create(newTemplate) {
     const created = await template
-      .create(template)
+      .create(newTemplate)
       .catch(error => { throw new Error(error) })
     return created._id
   }
