@@ -1,5 +1,8 @@
-const assert = require('assert/strict')
 const MongoClient = require('mongodb').MongoClient
+
+function assert(value, message) {
+  if (!value) throw new Error(message)
+}
 
 let _db
 
